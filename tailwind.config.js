@@ -7,6 +7,10 @@ export default {
         inputCreate: {
           '0%': { opacity: 0 },
           '100%': { opacity: 1 }
+        },
+        showShop: {
+          '0%': { height: 0 },
+          '100%': { height: '100%' }
         }
       }
     }

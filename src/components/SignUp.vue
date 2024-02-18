@@ -1,10 +1,12 @@
 <script setup>
+const props = defineProps({
+  isAuth: Function,
+  setIdUser: Function
+})
+
 import axios from 'axios'
 import { ref } from 'vue'
 const typeSign = ref('reg')
-defineProps({
-  isAuthEdit: Function
-})
 
 const addUser = () => {
   const login = document.getElementById('login').value
@@ -21,7 +23,12 @@ const addUser = () => {
     } else {
       axios.post('https://a1d710d803a84bf6.mokky.dev/users', {
         login: login,
-        pass: password
+        pass: password,
+        money: 0,
+        multiTaps: 0,
+        priceMultiTap: 200,
+        autoClickerLevel: 0,
+        priceClickerLevel: 1000
       })
     }
   } else if (typeSign.value == 'reg') {
@@ -32,10 +39,11 @@ const addUser = () => {
         const users = response.data
         for (let i = 0; i < users.length; i++) {
           if (users[i].login == login && users[i].pass == password) {
-            isAuthEdit()
+            props.isAuth(true)
+            props.setIdUser(users[i].id)
             break
           } else {
-            isAuthEdit()
+            props.isAuth(false)
           }
         }
       }
@@ -56,13 +64,12 @@ const switchSign = (type) => {
 
 <template>
   <div
-    class="w-96 h-[calc(100vh-100px)] bg-slate-300 relative flex items-center justify-center flex-col gap-4 p-16 rounded [&>input]:rounded [&>input]:w-full [&>input]:px-2 [&>input]:bg-slate-200 [&>input]:placeholder:text-slate-500"
+    class="w-96 h-[700px] bg-slate-300 relative flex items-center justify-center flex-col gap-4 p-16 rounded [&>input]:rounded [&>input]:w-full [&>input]:px-2 [&>input]:bg-slate-200 [&>input]:placeholder:text-slate-500"
   >
     <div
       class="flex w-full justify-between h-8 [&>span]:flex items-center rounded transition-all cursor-pointer p-4 text-slate-700 [&>span]:transition-all"
       id="sign"
     >
-      <div v-if="isAuth"><h1>logged</h1></div>
       <span
         @click="switchSign('reg')"
         v-bind:class="[typeSign == 'in' ? 'border-b-2 text-black' : '']"
