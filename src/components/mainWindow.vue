@@ -129,8 +129,7 @@ const addMoney = () => {
 <style scoped>
 .background {
   width: 24rem;
-  height: auto;
-  min-height: 700px;
+  height: 700px;
   position: relative;
   border-radius: 20px;
   background-size: 100% 100%;
@@ -145,5 +144,11 @@ const addMoney = () => {
     radial-gradient(142% 91% at 83% 7%, #ffdb00ff 1%, #ff000000 99%),
     radial-gradient(142% 91% at -6% 74%, #ff0049ff 1%, #ff000000 99%),
     radial-gradient(142% 91% at 111% 84%, #ff7000ff 0%, #ff0000ff 100%);
+}
+@media (max-width: 400px) {
+  .background {
+    width: 100vw;
+    height: 100vh;
+  }
 }
 </style>

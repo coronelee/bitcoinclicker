@@ -25,7 +25,7 @@ const addUser = () => {
         login: login,
         pass: password,
         money: 0,
-        multiTaps: 0,
+        multiTaps: 1,
         priceMultiTap: 200,
         autoClickerLevel: 0,
         priceClickerLevel: 1000
@@ -64,7 +64,7 @@ const switchSign = (type) => {
 
 <template>
   <div
-    class="w-96 h-[700px] bg-slate-300 relative flex items-center justify-center flex-col gap-4 p-16 rounded [&>input]:rounded [&>input]:w-full [&>input]:px-2 [&>input]:bg-slate-200 [&>input]:placeholder:text-slate-500"
+    class="max-[384px]:w-full max-w-[384px]:h-full w-96 h-[700px] bg-slate-300 relative flex items-center justify-center flex-col gap-4 p-16 rounded [&>input]:rounded [&>input]:w-full [&>input]:px-2 [&>input]:bg-slate-200 [&>input]:placeholder:text-slate-500"
   >
     <div
       class="flex w-full justify-between h-8 [&>span]:flex items-center rounded transition-all cursor-pointer p-4 text-slate-700 [&>span]:transition-all"

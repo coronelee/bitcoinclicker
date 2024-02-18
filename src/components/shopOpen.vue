@@ -61,22 +61,6 @@ defineProps({
 
         <span class="w-full h-[50px] hover:bg-[#ffffff4d]">multitap</span>
       </div>
-      <!-- <div
-        class="w-full h-auto bg-[#ffffff4d] rounded-xl bottom-0 flex flex-col [&>span]:flex [&>span]:items-center [&>span]:justify-center [&>span]:gap-2 [&>span]:cursor-pointer [&>span]:transition-all"
-      >
-        <span class="w-full h-[50px] hover:bg-[#ffffff4d]" @click="buyMultiTap">
-          <span>{{ priceMultiTap }}</span>
-          <span>multitap</span>
-          <span>{{ multiTapLevel }}/10</span>
-        </span>
-
-        <span class="w-full h-[50px] hover:bg-[#ffffff4d]" @click="buyAutoClicker">
-          <span>{{ priceAutoClicker }}</span>
-          <span>autoclicker</span>
-          <span>{{ autoClickerLevel }}/10</span>
-        </span>
-        <span class="w-full h-[50px] hover:bg-[#ffffff4d]">multitap</span>
-      </div> -->
     </div>
   </div>
   <div
