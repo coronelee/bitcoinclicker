@@ -12,6 +12,7 @@ const multiTaps = ref()
 const priceMultiTap = ref()
 const autoClickerLevel = ref()
 const priceClickerLevel = ref()
+const setIcon = ref('btc')
 const user = ref({})
 
 onMounted(() => {
@@ -22,6 +23,7 @@ onMounted(() => {
     multiTaps.value = user.value.multiTaps
     autoClickerLevel.value = user.value.autoClickerLevel
     priceClickerLevel.value = user.value.priceClickerLevel
+    setIcon.value = user.value.icon
   })
 
   setInterval(() => {
@@ -100,6 +102,24 @@ const addMoney = () => {
     document.getElementById('bitcoin').classList.remove('-translate-y-2')
   }, 50)
 }
+
+const buyIcon = (icon) => {
+  if (money.value < 100000) {
+    document.getElementById('money').classList.add('animate-[spin_.4s_ease-in-out]')
+    animation = !animation
+    setTimeout(() => {
+      document.getElementById('money').classList.remove('animate-[spin_.4s_ease-in-out]')
+      animation = !animation
+    }, 400)
+  } else {
+    money.value -= 100000
+    axios.patch('https://a1d710d803a84bf6.mokky.dev/users/' + props.idUser, {
+      icon: icon,
+      money: money.value
+    })
+    setIcon.value = icon
+  }
+}
 </script>
 
 <template>
@@ -112,12 +132,34 @@ const addMoney = () => {
       :priceAutoClicker="priceClickerLevel"
       :multiTapLevel="multiTaps"
       :autoClickerLevel="autoClickerLevel"
+      :buyIcon="buyIcon"
+      :setIcon="setIcon"
     />
     <div class="w-full h-full absolute top-0 left-0 flex items-center justify-center flex-col">
-      <span class="text-5xl font-bold text-white">{{ money }}₿</span>
+      <span class="text-5xl font-bold text-white"
+        >{{ money }} <span v-if="setIcon == 'btc'">₿</span> <span v-if="setIcon == 'eth'"> Ξ</span>
+        <span v-if="setIcon == 'doge'">DC</span>
+      </span>
       <img
+        v-if="setIcon == 'btc'"
         src="/bitcoin.svg"
         alt="bitcoin"
+        class="w-64 h-64 cursor-pointer transition-all"
+        @click="addMoney"
+        id="bitcoin"
+      />
+      <img
+        v-if="setIcon == 'eth'"
+        src="/eth.svg"
+        alt="eth"
+        class="w-64 h-64 cursor-pointer transition-all"
+        @click="addMoney"
+        id="bitcoin"
+      />
+      <img
+        v-if="setIcon == 'doge'"
+        src="/doge.svg"
+        alt="doge"
         class="w-64 h-64 cursor-pointer transition-all"
         @click="addMoney"
         id="bitcoin"
@@ -129,9 +171,9 @@ const addMoney = () => {
 <style scoped>
 .background {
   width: 24rem;
-  height: 700px;
+  min-height: 700px;
+  height: 1400px;
   position: relative;
-  border-radius: 20px;
   background-size: 100% 100%;
   background-position:
     0px 0px,

@@ -15,7 +15,7 @@ function isAuthEdit(boolean) {
 
 <template>
   <div
-    class="w-screen h-screen bg-slate-800 [&>input]:bg-slate-200 [&>input]:p-2 [&>input]:m-2 flex items-center justify-center"
+    class="w-screen h-auto bg-slate-800 [&>input]:bg-slate-200 [&>input]:p-2 [&>input]:m-2 flex items-center justify-center"
   >
     <component v-if="!isAuth" :is="SignUp" :isAuth="isAuthEdit" :setIdUser="setIdUser" />
     <component v-if="isAuth" :is="mainWindow" :idUser="idUser" />

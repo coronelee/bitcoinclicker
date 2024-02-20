@@ -28,8 +28,10 @@ const addUser = () => {
         multiTaps: 1,
         priceMultiTap: 200,
         autoClickerLevel: 0,
-        priceClickerLevel: 1000
+        priceClickerLevel: 1000,
+        icon: 'btc'
       })
+      typeSign.value = 'reg'
     }
   } else if (typeSign.value == 'reg') {
     axios.get('https://a1d710d803a84bf6.mokky.dev/users').then((response) => {
@@ -64,7 +66,7 @@ const switchSign = (type) => {
 
 <template>
   <div
-    class="max-[384px]:w-full max-w-[384px]:h-full w-96 h-[700px] bg-slate-300 relative flex items-center justify-center flex-col gap-4 p-16 rounded [&>input]:rounded [&>input]:w-full [&>input]:px-2 [&>input]:bg-slate-200 [&>input]:placeholder:text-slate-500"
+    class="bg-gradient-to-b from-[#a100ffff] to-[#71c4ffff] max-[400px]:w-full max-w-[384px]:h-full w-96 h-[700px] bg-slate-300 relative flex items-center justify-center flex-col gap-4 p-16 rounded [&>input]:rounded [&>input]:w-full [&>input]:px-2 [&>input]:bg-slate-200 [&>input]:placeholder:text-slate-500"
   >
     <div
       class="flex w-full justify-between h-8 [&>span]:flex items-center rounded transition-all cursor-pointer p-4 text-slate-700 [&>span]:transition-all"
@@ -82,15 +84,35 @@ const switchSign = (type) => {
       >
     </div>
 
-    <input type="text" id="login" placeholder="Логин" />
-    <input type="text" id="password" placeholder="Пароль" />
+    <input
+      type="text"
+      id="login"
+      placeholder="Логин"
+      class="outline-none bg-slate-200 family-sans-serif"
+    />
+    <input
+      type="text"
+      id="password"
+      placeholder="Пароль"
+      class="outline-none bg-slate-200 family-sans-serif"
+    />
     <input
       placeholder="Повторите пароль"
       v-if="typeSign != 'reg'"
       type="text"
       id="repeatPassword"
-      class="transition animate-[inputCreate_1s_ease-in-out]"
+      class="transition animate-[inputCreate_1s_ease-in-out] outline-none bg-slate-200 family-sans-serif"
     />
-    <button class="p-2 text-white bg-slate-700 rounded" @click="addUser">Зарегистрироваться</button>
+    <button class="p-2 text-white bg-slate-700 rounded" @click="addUser">
+      <span v-if="typeSign == 'in'">Зарегистрироваться</span><span v-else>Войти</span>
+    </button>
   </div>
 </template>
+
+<style scoped>
+.bg {
+  background-size: 100% 100%;
+  background-position: 0px 0px;
+  background-image: linear-gradient(90deg, #a100ffff 0%, #71c4ffff 100%);
+}
+</style>
